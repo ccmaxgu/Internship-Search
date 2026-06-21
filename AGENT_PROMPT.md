@@ -4,31 +4,33 @@ Run this workflow once, start to finish, and then stop.
 
 ## 1. Load inputs
 
-- Read `firms.json` for the target firm list (banks, asset managers, hedge funds/prop trading).
+- Read `firms.json` for the target firm list (banks, asset managers, hedge funds/prop trading, middle market private equity).
 
 ## 2. Search for listings
 
 Target recruiting cycle: **Summer 2028** internships.
 
-Target roles: any finance-related summer analyst / internship role, including but not limited to investment banking, wealth management, asset management, sales & trading, equity/credit research, and other summer analyst programs. Exclude roles that are clearly non-finance (e.g. pure software engineering, HR, marketing) unless the listing itself is a finance-track program.
+Target roles: any finance-related summer analyst / internship role, including but not limited to investment banking, wealth management, asset management, sales & trading, equity/credit research, private equity, and other summer analyst programs. Exclude roles that are clearly non-finance (e.g. pure software engineering, HR, marketing) unless the listing itself is a finance-track program.
+
+Location: **US-based roles only.** Every search must specify a US location, and any extracted listing whose location is outside the United States must be discarded.
 
 For every firm in `firms.json`:
-- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2028 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2028 internship`, `site:<firm-careers-domain> summer analyst 2028`.
+- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2028 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2028 internship United States`, `site:<firm-careers-domain> summer analyst 2028 United States`.
 - If a firm's career site search returns nothing or a fetch fails, skip that firm for this run and note it in your final run summary (do not fail the whole run).
 
 Additionally, run a small set of aggregator searches covering all firms at once:
-- `site:linkedin.com/jobs finance summer analyst 2028`
-- `site:indeed.com finance internship summer 2028`
-- general web search for "finance summer analyst internship 2028" plus each firm name if the firm-specific search came up empty.
+- `site:linkedin.com/jobs finance summer analyst 2028 United States`
+- `site:indeed.com finance internship summer 2028 United States`
+- general web search for "finance summer analyst internship 2028 United States" plus each firm name if the firm-specific search came up empty.
 
 For each posting found, extract:
 - `firm`
 - `title`
-- `location`
+- `location` (must be a US city/state)
 - `link` (the posting URL)
-- `description` — 1-2 sentences covering role focus (e.g. IB, wealth management, asset management, sales & trading) and any stated eligibility/class-year requirement
+- `description` — 1-2 sentences covering role focus (e.g. IB, wealth management, asset management, sales & trading, private equity) and any stated eligibility/class-year requirement
 
-Only keep postings that are clearly tied to one of the firms in `firms.json` and are finance-related (per the role scope above) for the Summer 2028 cycle (dedupe firm name spelling/casing as needed).
+Only keep postings that are clearly tied to one of the firms in `firms.json`, are finance-related (per the role scope above), are US-based, and are for the Summer 2028 cycle (dedupe firm name spelling/casing as needed).
 
 Include every matching listing found this run — do not filter out listings just because they were also found in a previous day's run.
 
