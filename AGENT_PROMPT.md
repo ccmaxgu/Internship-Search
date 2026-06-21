@@ -9,23 +9,27 @@ Run this workflow once, start to finish, and then stop. Working directory: `/Use
 
 ## 2. Search for listings
 
+Target recruiting cycle: **Summer 2028** internships.
+
+Target roles: any finance-related summer analyst / internship role, including but not limited to investment banking, wealth management, asset management, sales & trading, equity/credit research, and other summer analyst programs. Exclude roles that are clearly non-finance (e.g. pure software engineering, HR, marketing) unless the listing itself is a finance-track program.
+
 For every firm in `firms.json`:
-- Use WebSearch (and WebFetch on promising result pages) to find current internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> internship 2027`.
+- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2028 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2028 internship`, `site:<firm-careers-domain> summer analyst 2028`.
 - If a firm's career site search returns nothing or a fetch fails, skip that firm for this run and note it in your final run summary (do not fail the whole run).
 
 Additionally, run a small set of aggregator searches covering all firms at once:
-- `site:linkedin.com/jobs finance internship 2027`
-- `site:indeed.com finance internship 2027`
-- general web search for "finance internship 2027" plus each firm name if the firm-specific search came up empty.
+- `site:linkedin.com/jobs finance summer analyst 2028`
+- `site:indeed.com finance internship summer 2028`
+- general web search for "finance summer analyst internship 2028" plus each firm name if the firm-specific search came up empty.
 
 For each posting found, extract:
 - `firm`
 - `title`
 - `location`
 - `link` (the posting URL)
-- `description` — 1-2 sentences covering role focus and any stated eligibility/class-year requirement
+- `description` — 1-2 sentences covering role focus (e.g. IB, wealth management, asset management, sales & trading) and any stated eligibility/class-year requirement
 
-Only keep postings that are clearly tied to one of the firms in `firms.json` (dedupe firm name spelling/casing as needed).
+Only keep postings that are clearly tied to one of the firms in `firms.json` and are finance-related (per the role scope above), and are for the Summer 2028 cycle (dedupe firm name spelling/casing as needed).
 
 ## 3. Diff against seen listings
 
