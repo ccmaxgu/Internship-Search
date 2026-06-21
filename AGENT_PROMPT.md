@@ -34,20 +34,12 @@ Only keep postings that are clearly tied to one of the firms in `firms.json`, ar
 
 Include every matching listing found this run — do not filter out listings just because they were also found in a previous day's run.
 
-## 3. Send the summary email
+## 3. Create the summary draft
 
-Compose an email body grouped by firm, each entry showing title, location, link, and description. If no listings were found this run, send a short email saying so rather than skipping it.
+Compose an email body grouped by firm, each entry showing title, location, link, and description. If no listings were found this run, create a draft saying so rather than skipping it.
 
-Send the email via SMTP using Python's `smtplib` (invoke with the Bash tool), not the Gmail MCP draft tool:
-
-- SMTP server: `smtp.gmail.com`, port `587`, STARTTLS
-- From / login account: `ccmaxgu@gmail.com`
-- App password: provided in the run instructions for this task (do not hardcode it in any repo file)
-- To: `ccmaxgu@gmail.com`
-- Subject: `Finance Internship Postings - <today's date, e.g. 2026-06-21>`
-
-Write a short inline Python script, run it with `python3 -c "..."` or a temp script file, and confirm the SMTP call succeeded (no exception) before reporting success.
+Call the Gmail MCP `create_draft` tool, addressed to `ccmaxgu@gmail.com`, subject `Finance Internship Postings - <today's date, e.g. 2026-06-21>`.
 
 ## 4. Final summary
 
-Output a short summary of the run: how many firms were searched, how many were skipped (and why), how many listings were found, and confirmation the email was sent.
+Output a short summary of the run: how many firms were searched, how many were skipped (and why), how many listings were found, and confirmation the draft was created.
