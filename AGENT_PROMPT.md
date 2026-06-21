@@ -1,11 +1,10 @@
 # Daily Finance Internship Search
 
-Run this workflow once, start to finish, and then stop. Working directory: `/Users/ccmaxgu/Intern Search`.
+Run this workflow once, start to finish, and then stop.
 
-## 1. Load state
+## 1. Load inputs
 
 - Read `firms.json` for the target firm list (banks, asset managers, hedge funds/prop trading).
-- Read `seen_listings.json` for previously-seen listings (keys are listing URLs, or a `firm|title|location` string if no stable URL exists; values are the date first seen).
 
 ## 2. Search for listings
 
@@ -29,24 +28,24 @@ For each posting found, extract:
 - `link` (the posting URL)
 - `description` — 1-2 sentences covering role focus (e.g. IB, wealth management, asset management, sales & trading) and any stated eligibility/class-year requirement
 
-Only keep postings that are clearly tied to one of the firms in `firms.json` and are finance-related (per the role scope above), and are for the Summer 2028 cycle (dedupe firm name spelling/casing as needed).
+Only keep postings that are clearly tied to one of the firms in `firms.json` and are finance-related (per the role scope above) for the Summer 2028 cycle (dedupe firm name spelling/casing as needed).
 
-## 3. Diff against seen listings
+Include every matching listing found this run — do not filter out listings just because they were also found in a previous day's run.
 
-- Build a key for each extracted listing: prefer the posting URL; if a firm reposts the same role under a tracking-parameter-mutated URL, normalize by stripping query strings before keying.
-- Compare against `seen_listings.json`. Keep only listings whose key is NOT already present.
+## 3. Send the summary email
 
-## 4. Send the summary (only if there are new listings)
+Compose an email body grouped by firm, each entry showing title, location, link, and description. If no listings were found this run, send a short email saying so rather than skipping it.
 
-If there is at least one new listing:
-- Compose an email body grouped by firm, each entry showing title, location, link, and description.
-- Call the Gmail MCP `create_draft` tool, addressed to `ccmaxgu@gmail.com`, subject `Finance Internship Postings - <today's date, e.g. 2026-06-21>`.
-- Only after the draft is created successfully, write the new listings into `seen_listings.json` (merge with existing entries, don't drop old ones), each with today's date as the first-seen value.
+Send the email via SMTP using Python's `smtplib` (invoke with the Bash tool), not the Gmail MCP draft tool:
 
-If there are no new listings:
-- Do not create a draft.
-- Do not modify `seen_listings.json`.
+- SMTP server: `smtp.gmail.com`, port `587`, STARTTLS
+- From / login account: `ccmaxgu@gmail.com`
+- App password: provided in the run instructions for this task (do not hardcode it in any repo file)
+- To: `ccmaxgu@gmail.com`
+- Subject: `Finance Internship Postings - <today's date, e.g. 2026-06-21>`
 
-## 5. Final summary
+Write a short inline Python script, run it with `python3 -c "..."` or a temp script file, and confirm the SMTP call succeeded (no exception) before reporting success.
 
-Output a short summary of the run: how many firms were searched, how many were skipped (and why), how many new listings were found, and whether a draft was created.
+## 4. Final summary
+
+Output a short summary of the run: how many firms were searched, how many were skipped (and why), how many listings were found, and confirmation the email was sent.
