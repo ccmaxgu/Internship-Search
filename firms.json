@@ -1,0 +1,26 @@
+{
+  "banks": [
+    "Goldman Sachs",
+    "JPMorgan",
+    "Morgan Stanley",
+    "Bank of America",
+    "Citi",
+    "Barclays",
+    "Wells Fargo",
+    "UBS"
+  ],
+  "asset_managers": [
+    "BlackRock",
+    "Vanguard",
+    "Fidelity",
+    "T. Rowe Price"
+  ],
+  "hedge_funds_prop_trading": [
+    "Citadel",
+    "Point72",
+    "Jane Street",
+    "Two Sigma",
+    "Optiver",
+    "SIG"
+  ]
+}
