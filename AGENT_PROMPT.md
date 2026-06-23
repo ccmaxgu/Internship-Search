@@ -10,18 +10,20 @@ Run this workflow once, start to finish, and then stop.
 
 Target recruiting cycle: **Summer 2027** internships.
 
+Target candidate: a rising junior graduating in **2029**. Only keep postings open to rising juniors / students graduating 2029 (e.g. listings stating "rising junior," "class of 2029," "graduating December 2028/Spring 2029," or with no class-year restriction). Exclude postings explicitly restricted to rising seniors, sophomores, freshmen, or other graduation years.
+
 Target roles: any finance-related summer analyst / internship role, including but not limited to investment banking, wealth management, asset management, sales & trading, equity/credit research, private equity, and other summer analyst programs. Exclude roles that are clearly non-finance (e.g. pure software engineering, HR, marketing) unless the listing itself is a finance-track program.
 
 Location: **US-based roles only.** Every search must specify a US location, and any extracted listing whose location is outside the United States must be discarded.
 
 For every firm in `firms.json`:
-- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2027 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2027 internship United States`, `site:<firm-careers-domain> summer analyst 2027 United States`.
+- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2027 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2027 internship United States rising junior`, `site:<firm-careers-domain> summer analyst 2027 class of 2029`.
 - If a firm's career site search returns nothing or a fetch fails, skip that firm for this run and note it in your final run summary (do not fail the whole run).
 
 Additionally, run a small set of aggregator searches covering all firms at once:
-- `site:linkedin.com/jobs finance summer analyst 2027 United States`
-- `site:indeed.com finance internship summer 2027 United States`
-- general web search for "finance summer analyst internship 2027 United States" plus each firm name if the firm-specific search came up empty.
+- `site:linkedin.com/jobs finance summer analyst 2027 rising junior United States`
+- `site:indeed.com finance internship summer 2027 class of 2029 United States`
+- general web search for "finance summer analyst internship 2027 rising junior United States" plus each firm name if the firm-specific search came up empty.
 
 For each posting found, extract:
 - `firm`
@@ -30,7 +32,7 @@ For each posting found, extract:
 - `link` (the posting URL)
 - `description` — 1-2 sentences covering role focus (e.g. IB, wealth management, asset management, sales & trading, private equity) and any stated eligibility/class-year requirement
 
-Only keep postings that are clearly tied to one of the firms in `firms.json`, are finance-related (per the role scope above), are US-based, and are for the Summer 2027 cycle (dedupe firm name spelling/casing as needed).
+Only keep postings that are clearly tied to one of the firms in `firms.json`, are finance-related (per the role scope above), are US-based, are for the Summer 2027 cycle, and are open to a rising junior graduating 2029 per the eligibility rule above (dedupe firm name spelling/casing as needed).
 
 Include every matching listing found this run — do not filter out listings just because they were also found in a previous day's run.
 

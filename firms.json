@@ -44,5 +44,23 @@
     "New Mountain Capital",
     "Incline Equity Partners",
     "Odyssey Investment Partners"
+  ],
+  "boutique_investment_banks": [
+    "William Blair",
+    "TrueNorth Capital Partners",
+    "Lazard",
+    "Evercore",
+    "Moelis & Company",
+    "Centerview Partners",
+    "PJT Partners",
+    "Houlihan Lokey",
+    "Perella Weinberg Partners",
+    "Greenhill & Co.",
+    "Robert W. Baird",
+    "Piper Sandler",
+    "Stifel",
+    "Harris Williams",
+    "Lincoln International",
+    "Guggenheim Securities"
   ]
 }
