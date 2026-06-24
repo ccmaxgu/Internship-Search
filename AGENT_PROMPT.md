@@ -10,14 +10,15 @@ Run this workflow once, start to finish, and then stop.
 
 Target recruiting cycle: **Summer 2027** internships.
 
-Target candidate: a rising junior graduating in **2029**. Only keep postings open to rising juniors / students graduating 2029 (e.g. listings stating "rising junior," "class of 2029," "graduating December 2028/Spring 2029," or with no class-year restriction). Exclude postings explicitly restricted to rising seniors, sophomores, freshmen, or other graduation years.
+Target candidate: a rising junior graduating in **2029**. Only keep postings open to rising juniors / students graduating 2029 (e.g. listings stating "rising junior," "class of 2029," "graduating December 2028/Spring 2029," or with no class-year restriction). Exclude postings explicitly restricted to rising seniors.
 
-Target roles: any finance-related summer analyst / internship role, including but not limited to investment banking, wealth management, asset management, sales & trading, equity/credit research, private equity, and other summer analyst programs. Exclude roles that are clearly non-finance (e.g. pure software engineering, HR, marketing) unless the listing itself is a finance-track program.
+Target roles: any finance-related internship role, including (but not limited to) investment banking, investment management, wealth management, asset management, sales & trading, equity/credit research, private equity, and/or other summer analyst programs. Exclude roles that are clearly non-finance (e.g. pure software engineering, HR, marketing) unless the listing itself is a finance-track program.
 
 Location: **US-based roles only.** Every search must specify a US location, and any extracted listing whose location is outside the United States must be discarded.
 
 For every firm in `firms.json`:
-- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2027 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2027 internship United States rising junior`, `site:<firm-careers-domain> summer analyst 2027 class of 2029`.
+- Use WebSearch (and WebFetch on promising result pages) to find current Summer 2027 internship postings on that firm's own careers site, e.g. `site:<firm-careers-domain> summer 2027 internship United States rising junior`, `site:<firm-careers-domain> summer 2027 internship class of 2029`, etc.
+- If a firm's career site search says that applications are closed (or will open later in the year), skip that firm for this run.
 - If a firm's career site search returns nothing or a fetch fails, skip that firm for this run and note it in your final run summary (do not fail the whole run).
 
 Additionally, run a small set of aggregator searches covering all firms at once:
@@ -38,7 +39,7 @@ Include every matching listing found this run — do not filter out listings jus
 
 ## 3. Create the summary draft
 
-Compose an email body grouped by firm, each entry showing title, location, link, and description. If no listings were found this run, create a draft saying so rather than skipping it.
+Compose an email body grouped by firm, each entry showing title, location, link, and description. If no listings were found this run, create a draft and say "No listings were found."
 
 Call the Gmail MCP `create_draft` tool, addressed to `ccmaxgu@gmail.com`, subject `Finance Internship Postings - <today's date, e.g. 2026-06-21>`.
 
